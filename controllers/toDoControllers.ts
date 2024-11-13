@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import ToDo, { ITask } from "../models/toDoModel";
 
-export const getTasks = async (req: Request, res: Response) => {
+export const getTasks = async (req: Request, res: Response) :Promise <void> => {
     try {
         const tasks = await ToDo.find();
         res.status(200).json(tasks);
@@ -10,7 +10,7 @@ export const getTasks = async (req: Request, res: Response) => {
     }
 };
 
-export const createTask = async (req: Request, res: Response) => {
+export const createTask = async (req: Request, res: Response) : Promise <void> => {
     try {
         const task: ITask = req.body;
         const { title } = task;
@@ -22,7 +22,7 @@ export const createTask = async (req: Request, res: Response) => {
     }
 };
 
-export const deleteTask = async (req: Request, res: Response) => {
+export const deleteTask = async (req: Request, res: Response):Promise <void> => {
     try {
         const { id } = req.params;
         const task = await ToDo.findOneAndDelete({ _id: id });
@@ -36,7 +36,7 @@ export const deleteTask = async (req: Request, res: Response) => {
     }
 };
 
-export const updateTask = async (req: Request, res: Response) => {
+export const updateTask = async (req: Request, res: Response) :Promise <void>=> {
     try {
         const { id } = req.params;
         const { completed } = req.body;
