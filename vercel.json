@@ -1,5 +1,4 @@
-[
-    {
+{
         "version": 2,
         "builds": [
             {
@@ -10,8 +9,7 @@
         "routes": [
             {
                 "src": "/(.*)",
-                "dest": "/app.ts"
+                "dest": "app.ts"
             }
         ]
-    }
-]
+}
