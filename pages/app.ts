@@ -12,7 +12,7 @@ connectDB();
 
 app.use(cors())
 app.use(express.json());
-app.use("/", toDoRoutes);
+app.use("/todo", toDoRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
