@@ -1,6 +1,6 @@
 import express from "express";
-import { connectDB } from "./database/config";
-import toDoRoutes from './routes/toDoRoutes';
+import { connectDB } from "../database/config";
+import toDoRoutes from '../routes/toDoRoutes';
 import dotenv from "dotenv";
 import cors from "cors"
 
