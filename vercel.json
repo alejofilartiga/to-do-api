@@ -9,7 +9,7 @@
     "routes": [
         {
             "src": "/(.*)",
-            "dest": "pages/app.ts"
+            "dest": "app.ts"
         }
     ]
 }
