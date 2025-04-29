@@ -4,9 +4,13 @@ import toDoRoutes from './routes/toDoRoutes';
 import dotenv from "dotenv";
 import cors from "cors"
 const corsConfig = {
-  origin:"*",
-  credential:true,
-  methods: ["GET", "POST", "PATCH", "DELETE"],
+  origin: "https://to-do-alejo.netlify.app",
+  methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  preflightContinue: false,
+  optionsSuccessStatus: 200,
+  credentials: true,
+  exposedHeaders: ["Content-Range", "X-Content-Range"]
 }
 dotenv.config();
 
@@ -17,6 +21,7 @@ connectDB();
 app.use(cors(corsConfig))
 app.use(express.json());
 app.use("/todo", toDoRoutes);
+app.options(/(.*)/, cors(corsConfig))
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
