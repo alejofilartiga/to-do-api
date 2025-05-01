@@ -5,9 +5,7 @@ import dotenv from "dotenv";
 import cors from "cors"
 import swaggerUI from "swagger-ui-express"
 import specs from "./swagger/swagger";
-import fs from "fs";
-import path from "path";
-import YAML from "yaml";
+
 
 const corsConfig = {
   origin: "*",
@@ -24,32 +22,9 @@ const app = express();
 
 connectDB();
 
-const swaggerPath = path.resolve(__dirname, "./swagger.yaml");
-
-if (!fs.existsSync(swaggerPath)) {
-  throw new Error(`El archivo swagger.yaml no se encuentra en la ruta: ${swaggerPath}`);
-}
-
-const swaggerFile = fs.readFileSync(swaggerPath, "utf8");
-const swaggerCSS = fs.readFileSync(
-  path.resolve(__dirname, "../node_modules/swagger-ui-dist/swagger-ui.css"),
-  "utf8"
-);
-
-const swaggerDocument = YAML.parse(swaggerFile);
-const swaggerOptions = {
-  customCss: swaggerCSS,
-};
-
 app.use(cors(corsConfig))
 app.use(express.json());
 app.use("/docs", swaggerUI.serve, swaggerUI.setup(specs))
-app.use(
-  "/api-docs",
-  express.static("node_modules/swagger-ui-dist"),
-  swaggerUI.serve,
-  swaggerUI.setup(swaggerDocument, swaggerOptions)
-);
 app.use("/", toDoRoutes);
 app.options(/(.*)/, cors(corsConfig))
 
