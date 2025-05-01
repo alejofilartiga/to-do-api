@@ -2,7 +2,7 @@ const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-    entry: './index.ts',
+    entry: 'index.ts',
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js'
@@ -25,11 +25,11 @@ module.exports = {
     plugins: [
         new CopyWebpackPlugin({
             patterns: [
-                { from: "./node_modules/swagger-ui-dist/swagger-ui.css", to: "docs" },
-                { from: "./node_modules/swagger-ui-dist/swagger-ui-bundle.js", to: "docs" },
-                { from: "./node_modules/swagger-ui-dist/swagger-ui-standalone-preset.js", to: "docs" },
-                { from: "./node_modules/swagger-ui-dist/favicon-16x16.png", to: "docs" },
-                { from: "./node_modules/swagger-ui-dist/favicon-32x32.png", to: "docs" }
+                { from: "./node_modules/swagger-ui-dist/swagger-ui.css", to: "dist/docs" },
+                { from: "./node_modules/swagger-ui-dist/swagger-ui-bundle.js", to: "dist/docs" },
+                { from: "./node_modules/swagger-ui-dist/swagger-ui-standalone-preset.js", to: "dist/docs" },
+                { from: "./node_modules/swagger-ui-dist/favicon-16x16.png", to: "dist/docs" },
+                { from: "./node_modules/swagger-ui-dist/favicon-32x32.png", to: "dist/docs" }
             ]
         })
     ]
