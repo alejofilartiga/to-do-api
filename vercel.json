@@ -17,5 +17,8 @@
             },
             "dest": "index.ts"
         }
+    ],
+    "files": [
+        "swagger.yaml"
     ]
 }

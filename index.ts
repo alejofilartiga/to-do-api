@@ -24,7 +24,13 @@ const app = express();
 
 connectDB();
 
-const swaggerFile = fs.readFileSync(path.resolve(__dirname, "./swagger.yaml"), "utf8");
+const swaggerPath = path.resolve(__dirname, "./swagger.yaml");
+
+if (!fs.existsSync(swaggerPath)) {
+  throw new Error(`El archivo swagger.yaml no se encuentra en la ruta: ${swaggerPath}`);
+}
+
+const swaggerFile = fs.readFileSync(swaggerPath, "utf8");
 const swaggerCSS = fs.readFileSync(
   path.resolve(__dirname, "../node_modules/swagger-ui-dist/swagger-ui.css"),
   "utf8"
