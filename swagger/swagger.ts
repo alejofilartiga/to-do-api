@@ -12,7 +12,7 @@ const options = {
             },
             servers: [
                 {
-                    url: 'https://to-do-api-kappa-ruby.vercel.app/',
+                    url: 'https://to-do-api-kappa-ruby.vercel.app',
                     description: 'Development server'
                 }
             ]
