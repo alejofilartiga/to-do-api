@@ -3,8 +3,12 @@ import { connectDB } from "./database/config";
 import toDoRoutes from './routes/toDoRoutes';
 import dotenv from "dotenv";
 import cors from "cors"
+import swaggerUI from "swagger-ui-express"
+import specs from "./swagger/swagger";
+
+
 const corsConfig = {
-  origin: "https://to-do-alejo.netlify.app",
+  origin: "*",
   methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
   preflightContinue: false,
@@ -20,7 +24,8 @@ connectDB();
 
 app.use(cors(corsConfig))
 app.use(express.json());
-app.use("/todo", toDoRoutes);
+app.use("/docs", swaggerUI.serve, swaggerUI.setup(specs))
+app.use("/", toDoRoutes);
 app.options(/(.*)/, cors(corsConfig))
 
 const PORT = process.env.PORT || 8080;
