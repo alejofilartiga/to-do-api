@@ -25,11 +25,11 @@ module.exports = {
     plugins: [
         new CopyWebpackPlugin({
             patterns: [
-                { from: "./node_modules/swagger-ui-dist/swagger-ui.css", to: "." },
-                { from: "./node_modules/swagger-ui-dist/swagger-ui-bundle.js", to: "." },
-                { from: "./node_modules/swagger-ui-dist/swagger-ui-standalone-preset.js", to: "." },
-                { from: "./node_modules/swagger-ui-dist/favicon-16x16.png", to: "." },
-                { from: "./node_modules/swagger-ui-dist/favicon-32x32.png", to: "." }
+                { from: "./node_modules/swagger-ui-dist/swagger-ui.css", to: "docs" },
+                { from: "./node_modules/swagger-ui-dist/swagger-ui-bundle.js", to: "docs" },
+                { from: "./node_modules/swagger-ui-dist/swagger-ui-standalone-preset.js", to: "docs" },
+                { from: "./node_modules/swagger-ui-dist/favicon-16x16.png", to: "docs" },
+                { from: "./node_modules/swagger-ui-dist/favicon-32x32.png", to: "docs" }
             ]
         })
     ]
