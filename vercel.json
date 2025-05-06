@@ -13,7 +13,7 @@
         },
         { 
             "src": "/swagger/(.*)", 
-            "dest": "/public/swagger/$1" 
+            "dest": "/dist/docs/$1"
         },
         {
             "src": "/(.*)",
