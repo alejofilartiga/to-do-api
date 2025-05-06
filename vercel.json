@@ -8,11 +8,7 @@
     ],
     "routes": [
         {
-            "src": "/(css|js|images)/(.*)",
-            "dest": "public/$1/$2"
-        },
-        { 
-            "src": "/swagger/(.*)", 
+            "src": "/docs/(.*)",
             "dest": "/dist/docs/$1"
         },
         {
