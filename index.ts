@@ -6,7 +6,6 @@ import cors from "cors";
 import swaggerUI from "swagger-ui-express";
 import specs from "./swagger/swagger";
 import path from "path";
-import { getAbsoluteFSPath } from "swagger-ui-dist";
 
 const corsConfig = {
   origin: "*",
@@ -26,10 +25,8 @@ connectDB();
 app.use(cors(corsConfig));
 app.use(express.json());
 
-// Configuración de Swagger UI
-const swaggerUiAssetPath = getAbsoluteFSPath();
 app.use("/docs", swaggerUI.serve, swaggerUI.setup(specs));
-app.use("/docs", express.static(swaggerUiAssetPath)); // Servimos los archivos estáticos de swagger-ui-dist
+app.use("/docs", express.static(path.join(__dirname,"public")));
 
 app.use("/", toDoRoutes);
 app.options(/(.*)/, cors(corsConfig));
