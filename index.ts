@@ -27,8 +27,6 @@ app.use(express.json());
 app.use("/docs", swaggerUI.serve, swaggerUI.setup(specs));
 app.use("/docs", express.static(path.join(__dirname, "dist/docs"))); // Aseguramos que los archivos estáticos se sirvan correctamente
 
-app.use(express.static(path.join(__dirname, "/docs")));
-
 app.use("/", toDoRoutes);
 app.options(/(.*)/, cors(corsConfig))
 
