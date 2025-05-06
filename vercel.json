@@ -8,10 +8,6 @@
     ],
     "routes": [
         {
-            "src": "/docs/(.*)",
-            "dest": "/dist/docs/$1"
-        },
-        {
             "src": "/(.*)",
             "headers": {
                 "Access-Control-Allow-Origin": "https://to-do-alejo.netlify.app",
