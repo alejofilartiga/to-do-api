@@ -7,22 +7,7 @@
         }
     ],
     "routes": [
-        {
-            "src": "/swagger-ui/(.*)",
-            "dest": "/node_modules/swagger-ui-dist/$1"
-        },
-        {
-            "src": "/swagger-ui.css",
-            "dest": "/node_modules/swagger-ui-dist/swagger-ui.css"
-        },
-        {
-            "src": "/swagger-ui-bundle.js",
-            "dest": "/node_modules/swagger-ui-dist/swagger-ui-bundle.js"
-        },
-        {
-            "src": "/swagger-ui-standalone-preset.js",
-            "dest": "/node_modules/swagger-ui-dist/swagger-ui-standalone-preset.js"
-        },
+
         {
             "src": "/(.*)",
             "headers": {

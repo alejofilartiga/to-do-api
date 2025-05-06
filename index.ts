@@ -2,10 +2,11 @@ import express from "express";
 import { connectDB } from "./database/config";
 import toDoRoutes from './routes/toDoRoutes';
 import dotenv from "dotenv";
-import cors from "cors"
-import swaggerUI from "swagger-ui-express"
+import cors from "cors";
+import swaggerUI from "swagger-ui-express";
 import specs from "./swagger/swagger";
-import path from "path"
+import path from "path";
+import { getAbsoluteFSPath } from "swagger-ui-dist";
 
 const corsConfig = {
   origin: "*",
@@ -15,22 +16,23 @@ const corsConfig = {
   optionsSuccessStatus: 200,
   credentials: true,
   exposedHeaders: ["Content-Range", "X-Content-Range"]
-}
+};
 dotenv.config();
 
 const app = express();
 
 connectDB();
 
-app.use(cors(corsConfig))
+app.use(cors(corsConfig));
 app.use(express.json());
+
+// Configuración de Swagger UI
+const swaggerUiAssetPath = getAbsoluteFSPath();
 app.use("/docs", swaggerUI.serve, swaggerUI.setup(specs));
-app.use("/docs", express.static(path.join(__dirname, "dist/docs"))); // Aseguramos que los archivos estáticos se sirvan correctamente
+app.use("/docs", express.static(swaggerUiAssetPath)); // Servimos los archivos estáticos de swagger-ui-dist
 
 app.use("/", toDoRoutes);
-app.options(/(.*)/, cors(corsConfig))
-
-
+app.options(/(.*)/, cors(corsConfig));
 
 const PORT = process.env.PORT;
 
