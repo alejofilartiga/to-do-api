@@ -1,6 +1,6 @@
-import swaggerJsdoc from 'swagger-jsdoc';
+import swaggerJsdoc, { Options } from 'swagger-jsdoc';
 
-const options = {
+const options: Options = {
     definition: {
         openapi: '3.0.0',
         info: {
@@ -8,17 +8,17 @@ const options = {
             version: '1.0.0',
             description: 'API for managing tasks',
             contact: {
-                name: 'Alejo Filartiga'
+                name: 'Alejo Filartiga',
             },
-            servers: [
-                {
-                    url: 'https://to-do-api-kappa-ruby.vercel.app',
-                    description: 'Development server'
-                }
-            ]
-        }
+        },
+        servers: [
+            {
+                url: 'https://to-do-api-kappa-ruby.vercel.app',
+                description: 'Development server',
+            },
+        ],
     },
-    apis: ['./routes/toDoRoutes.ts']
+    apis: ['./routes/toDoRoutes.ts'], 
 };
 
 const specs = swaggerJsdoc(options);
