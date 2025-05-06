@@ -8,6 +8,14 @@
     ],
     "routes": [
         {
+            "src": "/(css|js|images)/(.*)",
+            "dest": "public/$1/$2"
+        },
+        { 
+            "src": "/swagger/(.*)", 
+            "dest": "/public/swagger/$1" 
+        },
+        {
             "src": "/(.*)",
             "headers": {
                 "Access-Control-Allow-Origin": "https://to-do-alejo.netlify.app",
