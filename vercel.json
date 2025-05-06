@@ -8,7 +8,7 @@
     ],
     "routes": [
         {
-            "src": "dist/docs/(.*)",
+            "src": "/docs/(.*)",
             "dest": "/dist/docs/$1" 
         },
         {

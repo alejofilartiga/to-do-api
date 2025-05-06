@@ -29,6 +29,11 @@ app.use("/docs", express.static(path.join(__dirname, "dist/docs"))); // Aseguram
 app.use("/", toDoRoutes);
 app.options(/(.*)/, cors(corsConfig))
 
+// Middleware para manejar rutas no encontradas
+app.use((req, res) => {
+  res.status(404).send("Ruta no encontrada");
+});
+
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log("Servidor iniciado en el puerto", PORT);
