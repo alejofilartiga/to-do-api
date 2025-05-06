@@ -28,6 +28,7 @@ module.exports = {
                 { from: "./node_modules/swagger-ui-dist/swagger-ui.css", to: "dist/docs" },
                 { from: "./node_modules/swagger-ui-dist/swagger-ui-bundle.js", to: "dist/docs" },
                 { from: "./node_modules/swagger-ui-dist/swagger-ui-standalone-preset.js", to: "dist/docs" },
+                { from: "./node_modules/swagger-ui-dist/swagger-ui-init.js", to: "dist/docs" },
                 { from: "./node_modules/swagger-ui-dist/favicon-16x16.png", to: "dist/docs" },
                 { from: "./node_modules/swagger-ui-dist/favicon-32x32.png", to: "dist/docs" }
             ]
