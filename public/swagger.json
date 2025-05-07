@@ -1,1294 +1,199 @@
 {
     "openapi": "3.0.0",
     "info": {
-      "title": "Tools Shop API",
+      "description": "This is a sample to do API.  You can find\nout more about me at\n[Github](https://github.com/alejofilartiga)",
       "version": "1.0.0",
-      "description": "Tool rental shop endpoints API"
+      "title": "to do API",
+      "termsOfService": "http://swagger.io/terms/",
+      "contact": {
+        "email": "alejofilartiga@gmail.com"
+      }
     },
     "servers": [
       {
-        "url": "https://tools-shop-server.vercel.app"
+        "url": "https://to-do-api-kappa-ruby.vercel.app"
+      }
+    ],
+    "tags": [
+      {
+        "name": "task",
+        "description": "task managing API",
+        "externalDocs": {
+          "description": "Use to-do-APP",
+          "url": "https://to-do-alejo.netlify.app/"
+        }
       }
     ],
     "paths": {
-      "/api/users/signup": {
-        "post": {
-          "tags": ["User"],
-          "summary": "Create a new user",
-          "operationId": "createUser",
-          "requestBody": {
-            "description": "User data",
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/User"
-                },
-                "example": {
-                  "password": "12345678",
-                  "email": "romasi4991@gmail.com",
-                  "phone": "+380638232827"
-                }
-              }
-            }
-          },
-          "responses": {
-            "201": {
-              "description": "User successfully created",
-              "content": {
-                "application/json": {
-                  "example": {
-                    "email": "romasi4991@gmail.com",
-                    "subscription": "client"
-                  }
-                }
-              }
-            },
-            "409": {
-              "description": "Conflict - Email already in use",
-              "content": {
-                "application/json": {
-                  "example": {
-                    "message": "Email already in use"
-                  }
-                }
-              }
-            },
-            "400": {
-              "description": "Bad request",
-              "content": {
-                "application/json": {
-                  "example": {
-                    "message": "Bad request"
-                  }
-                }
-              }
-            },
-            "500": {
-              "description": "Internal server error",
-              "content": {
-                "application/json": {
-                  "example": {
-                    "message": "Internal server error"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-  
-      "/api/users/verify/{verificationToken}": {
-        "get": {
-          "tags": ["User"],
-          "summary": "Verify user email with confirmation token",
-          "operationId": "verifyUser",
-          "parameters": [
-            {
-              "name": "verificationToken",
-              "description": "The request with the required token is carried out automatically when you click on the link that is sent to the mail after registration",
-              "in": "path",
-              "required": true,
-              "schema": {
-                "type": "string"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "User verified successfully",
-              "content": {
-                "application/json": {
-                  "example": {
-                    "message": "User verified successfully"
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "User not found",
-              "content": {
-                "application/json": {
-                  "example": {
-                    "message": "User not found"
-                  }
-                }
-              }
-            },
-            "500": {
-              "description": "Internal server error",
-              "content": {
-                "application/json": {
-                  "example": { "message": "Internal server error" }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/api/users/verify": {
-        "post": {
-          "tags": ["User"],
-          "summary": "User reverification",
-          "operationId": "verify",
-          "requestBody": {
-            "description": "User email",
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/User"
-                },
-                "example": {
-                  "email": "romasi4991@gmail.com"
-                }
-              }
-            }
-          },
-          "responses": {
-            "200": {
-              "description": "User logged in successfully",
-              "content": {
-                "application/json": {
-                  "example": {
-                    "message": "User logged in successfully"
-                  }
-                }
-              }
-            },
-            "400": {
-              "description": "Missing required field email",
-              "content": {
-                "application/json": {
-                  "example": {
-                    "message": "Missing required field email"
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "User not found",
-              "content": {
-                "application/json": {
-                  "example": {
-                    "message": "User not found"
-                  }
-                }
-              }
-            },
-            "403": {
-              "description": "Verification has already been passed",
-              "content": {
-                "application/json": {
-                  "example": {
-                    "message": "Wrong password"
-                  }
-                }
-              }
-            },
-            "500": {
-              "description": "Internal server error",
-              "content": {
-                "application/json": {
-                  "example": { "message": "Internal server error" }
-                }
-              }
-            }
-          }
-        }
-      },
-  
-      "/api/users/login": {
-        "post": {
-          "tags": ["User"],
-          "summary": "User login",
-          "operationId": "login",
-          "requestBody": {
-            "description": "User email and passwword",
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/User"
-                },
-                "example": {
-                  "password": "12345678",
-                  "email": "romasi4991@gmail.com"
-                }
-              }
-            }
-          },
-          "responses": {
-            "201": {
-              "description": "User successfully created",
-              "content": {
-                "application/json": {
-                  "example": {
-                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRhcmFzc2lyZW5rbzcxQGdtYWlsLmNvbSIsImlkIjoiNjRkYmI5ZDM1NWJhMzUyYTE5OWJmNzMyIiwic3Vic2NyaXB0aW9uIjoiZGlyZWN0b3IiLCJpYXQiOjE2OTIyMjQ5OTh9.pnTrwJZVSKQMQUnRTUQvFyBLTmCqyyGB5DDyNheCGw4",
-                    "user": {
-                      "email": "romasi4991@gmail.com",
-                      "phone": "+389345891245"
+        "/": {
+            "get": {
+                "tags": [
+                    "task"
+                ],
+                "summary": "Get all tasks",
+                "description": "Returns all tasks",
+                "operationId": "getTasks",
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Task"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Task not found"
                     }
-                  }
                 }
-              }
             },
-            "400": {
-              "description": "Wrong password",
-              "content": {
-                "application/json": {
-                  "example": {
-                    "message": "Wrong password"
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "User not found",
-              "content": {
-                "application/json": {
-                  "example": {
-                    "message": "User not found"
-                  }
-                }
-              }
-            },
-            "403": {
-              "description": "User not verified",
-              "content": {
-                "application/json": {
-                  "example": {
-                    "message": "User not verified"
-                  }
-                }
-              }
-            },
-            "500": {
-              "description": "Internal server error",
-              "content": {
-                "application/json": {
-                  "example": { "message": "Internal server error" }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/api/users/logout": {
-        "get": {
-          "tags": ["User"],
-          "summary": "User logout",
-          "operationId": "logout",
-          "security": [
-            {
-              "BearerAuth": []
-            }
-          ],
-          "parameters": [
-            {
-              "name": "Authorization",
-              "in": "header",
-              "description": "Access token",
-              "required": true,
-              "schema": {
-                "type": "string"
-              }
-            }
-          ],
-          "responses": {
-            "204": {
-              "description": "Logout successful",
-              "content": {
-                "application/json": {
-                  "example": {
-                    "message": "Logout successful"
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "User not found",
-              "content": {
-                "application/json": {
-                  "example": {
-                    "message": "User not found"
-                  }
-                }
-              }
-            },
-  
-            "500": {
-              "description": "Internal server error",
-              "content": {
-                "application/json": {
-                  "example": { "message": "Internal server error" }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/api/users/changePasswordRequest": {
-        "patch": {
-          "tags": ["User"],
-          "summary": "Password change request",
-          "operationId": "changePasswordRequest",
-          "requestBody": {
-            "description": "User email ",
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/User"
+            "post": {
+                "tags": ["task"],
+                "summary": "Create a task",
+                "description": "Create a new task",
+                "operationId": "createTask",
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/Task"
                 },
-                "example": {
-                  "email": "romasi4991@gmail.com"
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Task"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Task not found"
+                    }
                 }
-              }
             }
-          },
-          "responses": {
-            "200": {
-              "description": "Letter with a temporary password to restore access has been successfully sent to your mail",
-              "content": {
-                "application/json": {
-                  "example": {
-                    "mesage": "Letter with a temporary password to restore access has been successfully sent to your mail",
-                    "user": "user"
-                  }
-                }
-              }
-            },
-  
-            "400": {
-              "description": "Message not sent, please try again.",
-              "content": {
-                "application/json": {
-                  "example": {
-                    "message": "Message not sent, please try again."
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "User not found",
-              "content": {
-                "application/json": {
-                  "example": {
-                    "message": "User not found"
-                  }
-                }
-              }
-            },
-  
-            "500": {
-              "description": "Internal server error",
-              "content": {
-                "application/json": {
-                  "example": { "message": "Internal server error" }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/api/users/changePassword/{changePasswordToken}": {
-        "get": {
-          "tags": ["User"],
-          "summary": "Verification via email to change password",
-          "operationId": "changePassword",
-          "parameters": [
-            {
-              "name": "changePasswordToken",
-              "description": "The request with the necessary token is carried out automatically when you click on the link that comes to the mail after the request to change the password",
-              "in": "path",
-              "required": true,
-              "schema": {
-                "type": "string"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Password successfully changed to temporary",
-              "content": {
-                "application/json": {
-                  "example": {
-                    "mesage": "Password successfully changed to temporary",
-                    "user": "user"
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "Password recovery token is no longer active",
-              "content": {
-                "application/json": {
-                  "example": {
-                    "message": "Password recovery token is no longer active"
-                  }
-                }
-              }
-            },
-            "500": {
-              "description": "Internal server error",
-              "content": {
-                "application/json": {
-                  "example": { "message": "Internal server error" }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/api/users/userChengePassword": {
-        "patch": {
-          "tags": ["User"],
-          "summary": "User chenge assword",
-          "operationId": "userChengePassword",
-          "security": [
-            {
-              "BearerAuth": []
-            }
-          ],
-          "parameters": [
-            {
-              "name": "Authorization",
-              "in": "header",
-              "description": "Access token",
-              "required": true,
-              "schema": {
-                "type": "string"
-              }
-            }
-          ],
-          "requestBody": {
-            "description": "User email ",
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/User"
-                },
-                "example": {
-                  "email": "romasi4991@gmail.com"
-                }
-              }
-            }
-          },
-          "responses": {
-            "200": {
-              "description": "Password successfully changed",
-              "content": {
-                "application/json": {
-                  "example": {
-                    "mesage": "Password successfully changed",
-                    "user": "updatedUser"
-                  }
-                }
-              }
-            },
-            "400": {
-              "description": "Wrong password",
-              "content": {
-                "application/json": {
-                  "example": { "message": "Wrong password" }
-                }
-              }
-            },
-            "404": {
-              "description": "Password recovery token is no longer active",
-              "content": {
-                "application/json": {
-                  "example": {
-                    "message": "Password recovery token is no longer active"
-                  }
-                }
-              }
-            },
-            "500": {
-              "description": "Internal server error",
-              "content": {
-                "application/json": {
-                  "example": { "message": "Internal server error" }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/api/users/": {
-        "get": {
-          "tags": ["User"],
-          "summary": "Get all users",
-          "operationId": "getUsers",
-          "security": [
-            {
-              "BearerAuth": []
-            }
-          ],
-          "parameters": [
-            {
-              "name": "Authorization",
-              "in": "header",
-              "description": "Access token",
-              "required": true,
-              "schema": {
-                "type": "string"
-              }
-            },
-            {
-              "name": "page",
-              "in": "query",
-              "description": "User page number (20 each)",
-              "required": false,
-              "schema": {
-                "type": "number"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Users",
-              "content": {
-                "application/json": {
-                  "example": [
+        },
+        "/{id}": {
+            "delete": {
+                "tags": ["task"],
+                "summary": "Delete a task",
+                "description": "Delete a task by ID",
+                "operationId": "deleteTask",
+                "parameters": [
                     {
-                      "id": 1,
-                      "username": "user1",
-                      "email": "user1@example.com"
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID of the task to delete",
+                        "type":"string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
                     },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Task not found"
+                    }
+                }
+            },
+            "patch":{
+                "tags":["task"],
+                "summary":"Update a task",
+                "description":"Update a task status by ID",
+                "operationId":"updateTask",
+                "parameters":[
                     {
-                      "id": 2,
-                      "username": "user2",
-                      "email": "user2@example.com"
+                        "name":"id",
+                        "description":"ID of the task to update",
+                        "in":"path",
+                        "required":true,
+                        "type":"string"
                     }
-                  ]
-                }
-              }
-            },
-            "500": {
-              "description": "Internal server error",
-              "content": {
-                "application/json": {
-                  "example": { "message": "Internal server error" }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/api/users/{userId}": {
-        "get": {
-          "tags": ["User"],
-          "summary": "Get user by id",
-          "operationId": "getUserById",
-          "security": [
-            {
-              "BearerAuth": []
-            }
-          ],
-          "parameters": [
-            {
-              "name": "Authorization",
-              "in": "header",
-              "description": "Access token",
-              "required": true,
-              "schema": {
-                "type": "string"
-              }
-            },
-            {
-              "name": "userId",
-              "description": "User id",
-              "in": "path",
-              "required": true,
-              "schema": {
-                "type": "string"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "User",
-              "content": {
-                "application/json": {
-                  "example": {
-                    "id": 1,
-                    "username": "user1",
-                    "email": "user1@example.com"
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "User not found",
-              "content": {
-                "application/json": {
-                  "example": { "message": "No user with this id" }
-                }
-              }
-            },
-            "500": {
-              "description": "Internal server error",
-              "content": {
-                "application/json": {
-                  "example": { "message": "Internal server error" }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/api/users/byPhone": {
-        "get": {
-          "tags": ["User"],
-          "summary": "Get user by phone",
-          "operationId": "getUserByPhone",
-          "security": [
-            {
-              "BearerAuth": []
-            }
-          ],
-          "parameters": [
-            {
-              "name": "Authorization",
-              "in": "header",
-              "description": "Access token",
-              "required": true,
-              "schema": {
-                "type": "string"
-              }
-            }
-          ],
-          "requestBody": {
-            "description": "User phone",
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/User"
-                },
-                "example": {
-                  "phone": "+380638472839"
-                }
-              }
-            }
-          },
-          "responses": {
-            "200": {
-              "description": "User",
-              "content": {
-                "application/json": {
-                  "example": {
-                    "id": 1,
-                    "username": "user1",
-                    "email": "user1@example.com"
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "User not found",
-              "content": {
-                "application/json": {
-                  "example": { "message": "No user with this phone" }
-                }
-              }
-            },
-            "500": {
-              "description": "Internal server error",
-              "content": {
-                "application/json": {
-                  "example": { "message": "Internal server error" }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/api/users/remove": {
-        "delete": {
-          "tags": ["User"],
-          "summary": "Remove user by id",
-          "operationId": "removeUserById",
-          "security": [
-            {
-              "BearerAuth": []
-            }
-          ],
-          "parameters": [
-            {
-              "name": "Authorization",
-              "in": "header",
-              "description": "Access token",
-              "required": true,
-              "schema": {
-                "type": "string"
-              }
-            }
-          ],
-          "requestBody": {
-            "description": "User id",
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/User"
-                },
-                "example": {
-                  "userId": "1214264"
-                }
-              }
-            }
-          },
-          "responses": {
-            "200": {
-              "description": "Deleted user",
-              "content": {
-                "application/json": {
-                  "example": {
-                    "message": "User deleted successfully",
-                    "deletedUser": {
-                      "id": 1,
-                      "username": "user1",
-                      "email": "user1@example.com"
+                ],
+                "requestBody":{
+                    "required":true,
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "type":"object",
+                                "properties":{
+                                    "completed":{
+                                        "type":"boolean",
+                                        "description":"The status of the task"
+                                    }
+                                }
+                            }
+                        }
+
                     }
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "User not found",
-              "content": {
-                "application/json": {
-                  "example": { "message": "No user with this id" }
-                }
-              }
-            },
-            "500": {
-              "description": "Internal server error",
-              "content": {
-                "application/json": {
-                  "example": { "message": "Internal server error" }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/api/users/role": {
-        "patch": {
-          "tags": ["User"],
-          "summary": "Update user status",
-          "operationId": "updateUserStatus",
-          "security": [
-            {
-              "BearerAuth": []
-            }
-          ],
-          "parameters": [
-            {
-              "name": "Authorization",
-              "in": "header",
-              "description": "Access token",
-              "required": true,
-              "schema": {
-                "type": "string"
-              }
-            }
-          ],
-          "requestBody": {
-            "description": "User id",
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/User"
                 },
-                "example": {
-                  "userId": "1214264",
-                  "subscription": "client"
-                }
-              }
-            }
-          },
-          "responses": {
-            "200": {
-              "description": "Updated user",
-              "content": {
-                "application/json": {
-                  "example": {
-                    "message": "User status updated successfully",
-                    "updatedUser": {
-                      "id": 1,
-                      "username": "user1",
-                      "email": "user1@example.com"
-                    }
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "User not found",
-              "content": {
-                "application/json": {
-                  "example": { "message": "No user with this id" }
-                }
-              }
-            },
-            "500": {
-              "description": "Internal server error",
-              "content": {
-                "application/json": {
-                  "example": { "message": "Internal server error" }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/api/users/addAccess": {
-        "patch": {
-          "tags": ["User"],
-          "summary": "Add access to the store for the user",
-          "operationId": "addAccess",
-          "security": [
-            {
-              "BearerAuth": []
-            }
-          ],
-          "parameters": [
-            {
-              "name": "Authorization",
-              "in": "header",
-              "description": "Access token",
-              "required": true,
-              "schema": {
-                "type": "string"
-              }
-            }
-          ],
-          "requestBody": {
-            "description": "User id",
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/User"
-                },
-                "example": {
-                  "userId": "1214264",
-                  "storeId": "1214264"
-                }
-              }
-            }
-          },
-          "responses": {
-            "200": {
-              "description": "Updated user",
-              "content": {
-                "application/json": {
-                  "example": {
-                    "message": "User rights are extended (if the user has the status of a seller, then the store has been replaced)",
-                    "updatedUser": {
-                      "id": 1,
-                      "username": "user1",
-                      "email": "user1@example.com"
-                    }
-                  }
-                }
-              }
-            },
-            "403": {
-              "description": "Impossibility of extension of rights",
-              "content": {
-                "application/json": {
-                  "example": {
-                    "message": "It is impossible to expand the rights of the client"
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "User not found",
-              "content": {
-                "application/json": {
-                  "example": { "message": "No user with this id" }
-                }
-              }
-            },
-            "500": {
-              "description": "Internal server error",
-              "content": {
-                "application/json": {
-                  "example": { "message": "Internal server error" }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/api/users/removeAccess": {
-        "patch": {
-          "tags": ["User"],
-          "summary": "Remove access to the store for the user",
-          "operationId": "removeAccess",
-          "security": [
-            {
-              "BearerAuth": []
-            }
-          ],
-          "parameters": [
-            {
-              "name": "Authorization",
-              "in": "header",
-              "description": "Access token",
-              "required": true,
-              "schema": {
-                "type": "string"
-              }
-            }
-          ],
-          "requestBody": {
-            "description": "User id",
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/User"
-                },
-                "example": {
-                  "userId": "1214264",
-                  "storeId": "1214264"
-                }
-              }
-            }
-          },
-          "responses": {
-            "200": {
-              "description": "Updated user",
-              "content": {
-                "application/json": {
-                  "example": {
-                    "message": "The store is no longer available to this user",
-                    "updatedUser": {
-                      "id": 1,
-                      "username": "user1",
-                      "email": "user1@example.com"
-                    }
-                  }
-                }
-              }
-            },
-            "403": {
-              "description": "It is impossible to expand the rights of the client",
-              "content": {
-                "application/json": {
-                  "example": {
-                    "message": "It is impossible to expand the rights of the client"
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "User not found",
-              "content": {
-                "application/json": {
-                  "example": { "message": "No user with this id" }
-                }
-              }
-            },
-            "500": {
-              "description": "Internal server error",
-              "content": {
-                "application/json": {
-                  "example": { "message": "Internal server error" }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/api/users/statistics": {
-        "patch": {
-          "tags": ["User"],
-          "summary": "Update user statistic",
-          "operationId": "updateStatistic",
-          "security": [
-            {
-              "BearerAuth": []
-            }
-          ],
-          "parameters": [
-            {
-              "name": "Authorization",
-              "in": "header",
-              "description": "Access token",
-              "required": true,
-              "schema": {
-                "type": "string"
-              }
-            }
-          ],
-          "requestBody": {
-            "description": "User id",
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/User"
-                },
-                "example": {
-                  "userId": "1214264",
-                  "resultOfCooperation": [
-                    "GoodOrders",
-                    "OverdueOrders",
-                    "BrokenTool"
-                  ]
-                }
-              }
-            }
-          },
-          "responses": {
-            "200": {
-              "description": "Updated user",
-              "content": {
-                "application/json": {
-                  "example": {
-                    "message": "Client stats updated",
-                    "updatedUser": {
-                      "id": 1,
-                      "username": "user1",
-                      "email": "user1@example.com"
-                    }
-                  }
-                }
-              }
-            },
-            "403": {
-              "description": "Order statistics are relevant only for customers",
-              "content": {
-                "application/json": {
-                  "example": {
-                    "message": "Order statistics are relevant only for customers"
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "User not found",
-              "content": {
-                "application/json": {
-                  "example": { "message": "No user with this id" }
-                }
-              }
-            },
-            "500": {
-              "description": "Internal server error",
-              "content": {
-                "application/json": {
-                  "example": { "message": "Internal server error" }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/api/users/updateUserInfo": {
-        "patch": {
-          "tags": ["User"],
-          "summary": "Update user info",
-          "operationId": "updateUserInfo",
-          "security": [
-            {
-              "BearerAuth": []
-            }
-          ],
-          "parameters": [
-            {
-              "name": "Authorization",
-              "in": "header",
-              "description": "Access token",
-              "required": true,
-              "schema": {
-                "type": "string"
-              }
-            }
-          ],
-          "requestBody": {
-            "description": "User updates. Be sure to pass only the user ID",
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "userId": {
-                      "type": "string"
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Task"
+                                }
+                            }
+                        }
                     },
-                    "name": {
-                      "type": "string"
+                    "400": {
+                        "description": "Invalid ID supplied"
                     },
-                    "seriesPassportNumber": {
-                      "type": "string"
-                    },
-                    "email": {
-                      "type": "string"
-                    },
-                    "phone": {
-                      "type": "string"
+                    "404": {
+                        "description": "Task not found"
                     }
-                  },
-                  "required": ["userId"]
-                },
-                "example": {
-                  "userId": "1214264",
-                  "name": "",
-                  "seriesPassportNumber": "",
-                  "email": "",
-                  "phone": ""
                 }
-              }
             }
-          },
-          "responses": {
-            "200": {
-              "description": "Updated user",
-              "content": {
-                "application/json": {
-                  "example": {
-                    "message": "User updated successfully",
-                    "updatedUser": {
-                      "id": 1,
-                      "username": "user1",
-                      "email": "user1@example.com"
-                    }
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "User not found",
-              "content": {
-                "application/json": {
-                  "example": { "message": "No user with this id" }
-                }
-              }
-            },
-            "500": {
-              "description": "Internal server error",
-              "content": {
-                "application/json": {
-                  "example": { "message": "Internal server error" }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-  
+        },
     "components": {
       "schemas": {
-        "User": {
-          "type": "object",
-          "properties": {
-            "password": {
-              "type": "string",
-              "description": "User's password",
-              "example": "password"
+        "Task": {
+            "type": "object",
+            "required": [
+              "title"
+            ],
+            "properties": {
+                "title": {
+                    "type": "string",
+                    "description": "The title of the task"
+                },
+                "completed": {
+                    "type": "boolean",
+                    "description": "The status of the task"
+                }
             },
-            "name": {
-              "type": "string",
-              "description": "User's name",
-              "example": "John Doe"
-            },
-            "seriesPassportNumber": {
-              "type": "string",
-              "description": "User's passport series and number",
-              "example": "AB123456"
-            },
-            "email": {
-              "type": "string",
-              "description": "User's email",
-              "example": "johndoe@example.com"
-            },
-            "phone": {
-              "type": "string",
-              "description": "User's phone number",
-              "example": "+1234567890"
-            },
-            "subscription": {
-              "type": "string",
-              "description": "User's subscription role",
-              "enum": ["client", "seller", "manager", "director"],
-              "default": "client"
-            },
-            "token": {
-              "type": "string",
-              "description": "User's authentication token",
-              "example": "auth_token"
-            },
-            "verify": {
-              "type": "boolean",
-              "description": "User's verification status",
-              "default": false
-            },
-            "verificationToken": {
-              "type": "string",
-              "description": "User's verification token",
-              "example": "verification_token"
-            },
-            "setPasswordToken": {
-              "type": "string",
-              "description": "Token for setting/resetting password"
-            },
-            "counterGoodOrders": {
-              "type": "integer",
-              "description": "Number of successful orders",
-              "default": 0
-            },
-            "counterOverdueOrders": {
-              "type": "integer",
-              "description": "Number of overdue orders",
-              "default": 0
-            },
-            "counterBrokenTool": {
-              "type": "integer",
-              "description": "Number of broken tools",
-              "default": 0
-            },
-            "availableStores": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "description": "List of store IDs available to the user"
-            },
-            "orders": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "description": "List of order IDs associated with the user"
-            },
-            "tools": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "description": "List of tool IDs associated with the user"
+            "example": {
+                "title": "Practice JavaScript",
+                "completed": false
             }
-          }
         }
       },
-      "securitySchemes": {
-        "BearerAuth": {
-          "type": "apiKey",
-          "name": "Authorization",
-          "in": "header"
+      "requestBodies": {
+        "Task": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Task"
+              }
+            }
+          },
+          "description": "Task object that needs to be added to the list",
+          "required": true
         }
       }
     }
-  }
+}
+}

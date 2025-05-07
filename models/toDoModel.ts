@@ -1,23 +1,13 @@
-import {Model, Schema, model} from "mongoose"
+import mongoose, { Schema, Document } from "mongoose";
 
-export interface ITask {
-    title:string;
-    completed:boolean
+export interface ITask extends Document {
+    title: string;
+    completed: boolean;
 }
 
-const TaskSchema: Schema = new Schema (
-    {
-        title:{
-            type:String,
-            required:true
-        },
-        completed:{
-            type:Boolean,
-            default:false
-        }
-    }
-)
+const ToDoSchema: Schema = new Schema({
+    title: { type: String, required: true },
+    completed: { type: Boolean, default: false }
+});
 
-const ToDo : Model <ITask> = model <ITask> ("Tasks",TaskSchema);
-
-export default ToDo
+export default mongoose.model<ITask>("ToDo", ToDoSchema);

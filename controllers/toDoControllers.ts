@@ -16,18 +16,19 @@ export const createTask = async (req: Request, res: Response) : Promise <void> =
         const { title } = task;
         const newTask = new ToDo({ title });
         await newTask.save();
+
         res.status(200).json({ msg: "Tarea creada correctamente", newTask });
     } catch (error) {
         res.status(500).json({ error: "La tarea no se pudo crear correctamente" });
     }
 };
 
-export const deleteTask = async (req: Request, res: Response):Promise <void> => {
+export const deleteTask = async (req: Request, res: Response): Promise<void> => {
     try {
-        const { id } = req.params;
-        const task = await ToDo.findOneAndDelete({ _id: id });
+        const { id } = req.params; 
+        const task = await ToDo.findOneAndDelete({ _id: id }); 
         if (!task) {
-            res.status(400).json({ msg: "La tarea a eliminar no existe" });
+            res.status(404).json({ msg: "La tarea a eliminar no existe" });
         } else {
             res.status(200).json({ msg: "Tarea eliminada correctamente" });
         }
