@@ -4,7 +4,7 @@ import toDoRoutes from './routes/toDoRoutes';
 import dotenv from "dotenv";
 import cors from "cors";
 import swaggerUI from "swagger-ui-express";
-import specs from "./swagger/swagger";
+const swaggerDocument = require("./public/swagger.json");
 import path from "path";
 
 const corsConfig = {
@@ -25,8 +25,9 @@ connectDB();
 app.use(cors(corsConfig));
 app.use(express.json());
 
-app.use("/docs", swaggerUI.serve, swaggerUI.setup(specs));
+
 app.use(express.static(path.join(__dirname,"public")));
+app.use("/docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 app.use("/", toDoRoutes);
 app.options(/(.*)/, cors(corsConfig));
