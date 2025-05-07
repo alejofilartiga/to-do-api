@@ -4,7 +4,7 @@ import toDoRoutes from './routes/toDoRoutes';
 import dotenv from "dotenv";
 import cors from "cors";
 import swaggerUI from "swagger-ui-express";
-import specs from "./public/swagger";
+import specs from "./swagger/swagger";
 import path from "path";
 
 const corsConfig = {
