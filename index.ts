@@ -26,8 +26,8 @@ app.use(cors(corsConfig));
 app.use(express.json());
 
 
-app.use(express.static(path.join(__dirname,"public")));
-app.use("/", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
+app.use("/docs", express.static(path.join(__dirname, "public")));
+app.use("/docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 app.use("/", toDoRoutes);
 app.options(/(.*)/, cors(corsConfig));
